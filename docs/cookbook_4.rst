@@ -9,10 +9,12 @@
 
 `smtplib <https://docs.python.org/2/library/smtplib.html>`_ 是 Python 用来发送邮件的模块，`email <https://docs.python.org/2/library/email.html>`_ 是用来处理邮件消息。
 
-发送 HTML 形式的邮件，需要 email.mime.text 中的 MIMEText 的 _subtype 设置为 html，并且 _text 的内容应该为 HTML 形式。其它的就和 :ref:`cookbook_2` 一样::
+发送带图片的邮件是利用 email.mime.multipart 的 MIMEMultipart 以及 email.mime.image 的 MIMEImage::
 
 	import smtplib
+	from email.mime.multipart import MIMEMultipart
 	from email.mime.text import MIMEText
+	from email.mime.image import MIMEImage
 
 	sender = '***'
 	receiver = '***'
@@ -21,17 +23,26 @@
 	username = '***'
 	password = '***'
 
-	msg = MIMEText(u'''<pre>
-	<h1>你好</h1>
-	</pre>''','html','utf-8') 
+	msgRoot = MIMEMultipart('related')
+	msgRoot['Subject'] = 'test message'
 
-	msg['Subject'] = subject 
+	msgText = MIMEText(
+	    '''<b> Some <i> HTML </i> text </b > and an image.<img alt="" src="cid:image1"/>good!''', 'html', 'utf-8')
+	msgRoot.attach(msgText)
+
+	fp = open('/Users/1.jpg', 'rb')
+	msgImage = MIMEImage(fp.read())
+	fp.close()
+
+	msgImage.add_header('Content-ID', '<image1>')
+	msgRoot.attach(msgImage)
 
 	smtp = smtplib.SMTP()
 	smtp.connect(smtpserver)
 	smtp.login(username, password)
-	smtp.sendmail(sender, receiver, msg.as_string())
+	smtp.sendmail(sender, receiver, msgRoot.as_string())
 	smtp.quit()
+
 
 
 注意：这里的代码并没有把异常处理加入，需要读者自己处理异常。

@@ -9,23 +9,21 @@
 
 `smtplib <https://docs.python.org/2/library/smtplib.html>`_ 是 Python 用来发送邮件的模块，`email <https://docs.python.org/2/library/email.html>`_ 是用来处理邮件消息。
 
-发送 HTML 形式的邮件，需要 email.mime.text 中的 MIMEText 的 _subtype 设置为 html，并且 _text 的内容应该为 HTML 形式。其它的就和 :ref:`cookbook_2` 一样::
+群发邮件的时候需要注意收件人（receiver）的值，它为列表形式::
 
 	import smtplib
 	from email.mime.text import MIMEText
 
 	sender = '***'
-	receiver = '***'
+	receiver = ['***', '***', '...', '***']
 	subject = 'python email test'
 	smtpserver = 'smtp.163.com'
 	username = '***'
 	password = '***'
 
-	msg = MIMEText(u'''<pre>
-	<h1>你好</h1>
-	</pre>''','html','utf-8') 
+	msg = MIMEText('你好', 'plain', 'utf-8')
 
-	msg['Subject'] = subject 
+	msg['Subject'] = subject
 
 	smtp = smtplib.SMTP()
 	smtp.connect(smtpserver)
