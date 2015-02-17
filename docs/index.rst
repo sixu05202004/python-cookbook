@@ -26,6 +26,6 @@ activestate 原地址为： http://code.activestate.com/recipes/langs/python/。
    cookbook_5
    cookbook_6
    cookbook_7
-   cookbook_8
+
 
 
