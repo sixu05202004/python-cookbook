@@ -7,4 +7,6 @@ O’Reilly 根据这些资料出版过一本《Python Cookbook》，但是这本
 
 因此，这里为用户收集一些有用的功能的 Python 代码，为用户提供方便。activestate 原地址为： http://code.activestate.com/recipes/langs/python/。
 
-更多的信息请访问 
+系列文章：
+
+** 菜谱 1：创建一个唯一的 SESSION ID **   http://www.pythonpub.com/article/1502
