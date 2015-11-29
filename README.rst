@@ -9,4 +9,5 @@ O’Reilly 根据这些资料出版过一本《Python Cookbook》，但是这本
 
 系列文章：
 
-** 菜谱 1：创建一个唯一的 SESSION ID **   http://www.pythonpub.com/article/1502
+**菜谱 1：创建一个唯一的 SESSION ID**   http://www.pythonpub.com/article/1502
+**菜谱 2：发送普通文本邮件**   http://www.pythonpub.com/article/1503
